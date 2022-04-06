@@ -17,17 +17,14 @@ app.get("/", (req, res) => {
 })
 
 app.get("/:number", (req,res) => {
+    let href = (req.params.number) - 1
     if(parseInt(req.params.number) === 1) {
-        res.send(`
-    <html>
-        <body>
-        <p> There are no more bottles left </P>
+        res.send(
+        `<p> There are no more bottles left </P>
         <a href = "/">Back to home</a>
-        </body>    
-    </html>`
-    )}
+        `)}
     else if(req.params.number > 1){
-    res.send(parseInt(req.params.number) - 1 +' Bottles of beer left on the wall '+ `<a href=""> Take one down, Pass it around </a>`)
+    res.send(parseInt(req.params.number) - 1 +' Bottles of beer left on the wall ' + `<a href="${href}">Take one down, pass it</a>`)
     }
     else {
         res.send('Hold on partner, you must enter a number between 99 and 1')
