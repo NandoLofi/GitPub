@@ -10,13 +10,14 @@ app.get("/", (req, res) => {
     <html>
         <body>
         <h1> 99 Bottles of Beer On The Wall </h1>
-            <a href="">Pass It Around</a>
+            <a href="/99"> Take one down, Pass It Around</a>
         </body>
     </htmL>
     `)
 })
+
 app.get("/:number", (req,res) => {
-    if(req.params.number === "1") {
+    if(parseInt(req.params.number) === 1) {
         res.send(`
     <html>
         <body>
@@ -25,16 +26,15 @@ app.get("/:number", (req,res) => {
         </body>    
     </html>`
     )}
+    else if(req.params.number > 1){
+    res.send(parseInt(req.params.number) - 1 +' Bottles of beer left on the wall '+ `<a href=""> Take one down, Pass it around </a>`)
+    }
     else {
-        res.send(req.params.number - 1 +' Bottles of beer left on the wall')
+        res.send('Hold on partner, you must enter a number between 99 and 1')
     }
 })
 
 // //If user inputs number, send back text saying number of bottles left and url
-// app.get("/:numberofbottles/", (req, res) => {
-// res.send(req.params.numberofbottles - 1 +' Bottles of beer left on the wall')
-// })
-
 app.listen(port, () => {
     console.log('we are on port 3000')
 });
